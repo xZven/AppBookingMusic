@@ -12,6 +12,11 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
+        <include
+            android:layout_width="261dp"
+            android:layout_height="wrap_content"
+            layout="@layout/fragment_connection_manager" />
+
         <ImageButton
             android:layout_height="100dp"
             app:srcCompat="@drawable/logo100dp"
