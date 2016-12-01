@@ -7,6 +7,8 @@
     android:fitsSystemWindows="true"
     tools:context="net.stri.m2.appbookingmusic.StartActivity">
 
+    <include layout="@layout/content_start" />
+
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="151dp"
@@ -19,12 +21,17 @@
             android:id="@+id/AppBarLogoCMLayout">
 
             <ImageButton
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 app:srcCompat="@drawable/logo100dp"
                 android:id="@+id/imageButton3"
                 android:layout_weight="1"
-                android:layout_width="100dp"
-                android:layout_margin="10dp"/>
+                android:layout_width="wrap_content"
+                android:layout_margin="10dp"
+                android:visibility="visible"
+                android:cropToPadding="false"
+                android:adjustViewBounds="true"
+                style="@android:style/Widget.DeviceDefault.Light.ImageButton"
+                android:contentDescription="@string/imageButtonLogo" />
 
             <fragment
                 android:layout_width="wrap_content"
@@ -37,13 +44,37 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="21dp" />
 
+            <TextView
+                android:text="@string/app_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/imageButton3"
+                android:layout_toEndOf="@+id/imageButton3"
+                android:layout_marginStart="30dp"
+                android:id="@+id/textView"
+                android:textStyle="normal|bold"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif"
+                android:typeface="normal"
+                android:lineSpacingExtra="8sp" />
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/connectionManagerIncluder"
+                android:layout_toEndOf="@+id/imageButton3"
+                android:layout_marginBottom="8dp"
+                android:id="@+id/AppBarProgressBar"
+                android:max="@android:integer/config_shortAnimTime"
+                android:visibility="invisible" />
+
         </RelativeLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/LinearMenuLayout">
+            android:layout_height="wrap_content">
 
             <Button
                 android:text="Accueil"
