@@ -7,8 +7,6 @@
     android:fitsSystemWindows="true"
     tools:context="net.stri.m2.appbookingmusic.StartActivity">
 
-    <include layout="@layout/content_start" />
-
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="151dp"
