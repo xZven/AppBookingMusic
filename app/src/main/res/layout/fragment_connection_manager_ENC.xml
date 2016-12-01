@@ -1,0 +1,34 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="net.stri.m2.appbookingmusic.ConnectionManagerFragmentENC">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="36dp">
+
+        <Button
+            android:text="S'Identifier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonConnexion"
+            android:visibility="visible"
+            android:elevation="0dp"
+            android:layout_weight="1"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/buttonSinscrire" />
+
+        <Button
+            android:text="s'Inscrire"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonSinscrire"
+            android:layout_weight="1"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
+
+</FrameLayout>

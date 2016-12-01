@@ -7,29 +7,44 @@
     android:fitsSystemWindows="true"
     tools:context="net.stri.m2.appbookingmusic.StartActivity">
 
+    <include layout="@layout/content_start" />
+
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="151dp"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/AppBar">
 
-        <include
-            android:layout_width="261dp"
-            android:layout_height="wrap_content"
-            layout="@layout/fragment_connection_manager" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="103dp"
+            android:id="@+id/AppBarLogoCMLayout">
 
-        <ImageButton
-            android:layout_height="100dp"
-            app:srcCompat="@drawable/logo100dp"
-            android:id="@+id/imageButton3"
-            android:layout_weight="1"
-            android:layout_width="100dp"
-            android:layout_margin="10dp"/>
+            <ImageButton
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/logo100dp"
+                android:id="@+id/imageButton3"
+                android:layout_weight="1"
+                android:layout_width="100dp"
+                android:layout_margin="10dp"/>
+
+            <fragment
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:name="net.stri.m2.appbookingmusic.ConnectionManagerFragmentENC"
+                android:id="@+id/connectionManagerIncluder"
+                tools:layout="@layout/fragment_connection_manager_enc"
+                android:layout_weight="1"
+                android:layout_alignBottom="@+id/imageButton3"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="21dp" />
+
+        </RelativeLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_height="wrap_content">
 
             <Button
                 android:text="Accueil"
@@ -61,7 +76,5 @@
 
 
     </android.support.design.widget.AppBarLayout>
-
-    <include layout="@layout/content_start" />
 
 </android.support.design.widget.CoordinatorLayout>
