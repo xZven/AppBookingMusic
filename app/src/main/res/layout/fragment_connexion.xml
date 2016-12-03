@@ -140,22 +140,23 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_width="wrap_content"
+                    android:weightSum="1"
+                    android:layout_height="wrap_content">
 
                     <ImageView
                         app:srcCompat="@drawable/fblogo"
                         android:id="@+id/logofb"
-                        android:layout_weight="1"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp" />
+                        android:layout_height="50dp"
+                        android:adjustViewBounds="true"
+                        android:layout_weight="0.21"
+                        android:layout_width="50dp" />
 
                     <Button
                         android:text="Se connecter avec Facebook"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:id="@+id/buttonConnexionFacebook"
-                        android:layout_weight="1" />
+                        android:layout_width="290dp" />
 
                 </LinearLayout>
 
@@ -168,21 +169,22 @@
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:weightSum="1">
 
                     <ImageView
                         app:srcCompat="@drawable/gmaillogo"
                         android:id="@+id/logogmail"
-                        android:layout_weight="1"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp" />
+                        android:layout_height="50dp"
+                        android:layout_weight="0.16"
+                        android:adjustViewBounds="true"
+                        android:layout_width="50dp" />
 
                     <Button
                         android:text="Se connecter avec Gmail"
-                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/buttonConnexionGmail"
-                        android:layout_weight="1" />
+                        android:layout_width="290dp" />
                 </LinearLayout>
 
             </TableRow>
@@ -246,9 +248,11 @@
 
                 <Button
                     android:text="J'ai oublié mon mot de passe"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/buttonForgotMdp" />
+                    android:id="@+id/buttonForgotMdp"
+                    android:layout_height="50dp"
+                    android:layout_width="200dp"
+                    android:elevation="0dp"
+                    android:textStyle="normal|bold" />
             </TableRow>
 
         </TableLayout>
