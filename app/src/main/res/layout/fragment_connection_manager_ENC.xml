@@ -19,7 +19,9 @@
             android:elevation="0dp"
             android:layout_weight="1"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/buttonSinscrire" />
+            android:layout_toEndOf="@+id/buttonSinscrire"
+            android:onClick="sIndentifier"/>
+
 
         <Button
             android:text="s'Inscrire"
