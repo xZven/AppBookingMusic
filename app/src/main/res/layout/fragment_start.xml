@@ -15,9 +15,8 @@
     <include
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        layout="@layout/search_engine"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="287dp"
+        layout="@layout/fragment_inscription"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>
