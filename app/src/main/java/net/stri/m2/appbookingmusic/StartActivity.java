@@ -43,6 +43,8 @@ public class StartActivity extends AppCompatActivity {
      * }
      */
 
+
+    // Connection Manager Fragment methods
     public void sIndentifier(View v) {
 
         this.buttonSidentifier.setEnabled(false);
@@ -73,4 +75,21 @@ public class StartActivity extends AppCompatActivity {
         mainContent.addView(layout);
     }
 
+
+    //
+
+
+    public void connexion(View v){
+        this.buttonSidentifier.setEnabled(false);
+        this.buttonSinscrire.setEnabled(false);
+        //
+        RelativeLayout mainContent = (RelativeLayout) findViewById(R.id.CMFECRelativeLayout);
+        LayoutInflater inflater    = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View rootView              = inflater.inflate(R.layout.fragment_start, mainContent, false);
+        // création de la vue qui sera ajouté
+        View           layout      = inflater.inflate(R.layout.fragment_connexion, null);
+        //
+        mainContent.removeAllViews();
+        mainContent.addView(layout);
+    }
 }
