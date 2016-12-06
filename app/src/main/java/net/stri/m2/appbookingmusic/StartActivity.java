@@ -2,6 +2,8 @@ package net.stri.m2.appbookingmusic;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,14 @@ public class StartActivity extends AppCompatActivity {
         // Recensement des buttons
         this.buttonSidentifier = (Button) findViewById(R.id.buttonConnexion);
         this.buttonSinscrire   = (Button) findViewById(R.id.buttonConnexion);
+        Fragment fragmentTopConcert = null;
+        fragmentTopConcert = new FragmentTopConcert();
+        if (fragmentTopConcert != null)
+        {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment,fragmentTopConcert);
+            ft.commit();
+        }
      }
 
 

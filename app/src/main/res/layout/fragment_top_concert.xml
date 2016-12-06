@@ -1,0 +1,81 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="net.stri.m2.appbookingmusic.FragmentTopConcert">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <EditText
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:id="@+id/editFieldSearch"
+                android:text="mot-clés"
+                android:selectAllOnFocus="true"
+                android:layout_width="270dp"
+                android:textSize="16sp"
+                android:textStyle="normal|italic"
+                android:textColor="?attr/colorControlNormal" />
+
+        </TableRow>
+
+        <TableRow>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerRegion" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:text="Top Concerts -"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewTopConcerts"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:layout_width="120dp"
+                    android:textStyle="normal|bold" />
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewChoixRegion"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    android:textStyle="normal|bold"
+                    android:layout_width="230dp" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </TableLayout>
+
+</FrameLayout>
