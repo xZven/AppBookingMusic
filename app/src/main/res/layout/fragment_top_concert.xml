@@ -2,6 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
     tools:context="net.stri.m2.appbookingmusic.FragmentTopConcert">
 
     <!-- TODO: Update blank fragment layout -->
@@ -21,6 +23,8 @@
                 android:inputType="textPersonName"
                 android:id="@+id/editFieldSearch"
                 android:text="mot-clés"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:selectAllOnFocus="true"
                 android:layout_width="270dp"
                 android:textSize="16sp"
@@ -75,7 +79,13 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent" >
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/ListViewConcerts" />
+        </TableRow>
     </TableLayout>
 
 </FrameLayout>

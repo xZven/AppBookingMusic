@@ -10,11 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -39,6 +42,7 @@ public class FragmentTopConcert extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     TextView textViewChoixRegion;
+    ListView ListViewConcerts;
 
     public FragmentTopConcert() {
         // Required empty public constructor
@@ -78,6 +82,47 @@ public class FragmentTopConcert extends Fragment {
         // Spinner element
         Spinner spinner = (Spinner) view.findViewById(R.id.spinnerRegion);
 
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataSpinnerAdapter = new ArrayAdapter<String>(super.getContext(), android.R.layout.simple_spinner_item, genererListeRegions());
+
+        // Drop down layout style - list view with radio button
+        dataSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        spinner.setAdapter(dataSpinnerAdapter);
+
+        // Spinner click listener
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
+                // On selecting a spinner item
+                String item = parent.getItemAtPosition(position).toString();
+
+                // Showing selected spinner item
+                //Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+                textViewChoixRegion.setText(item);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+        afficherListeMusique();
+        genererTopConcert();
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view=inflater.inflate(R.layout.fragment_top_concert,container,false);
+        textViewChoixRegion = (TextView) view.findViewById(R.id.textViewChoixRegion);
+        ListViewConcerts = (ListView) view.findViewById(R.id.ListViewConcerts);
+        return view;
+    }
+
+    private List<String> genererListeRegions(){
         // Spinner Drop down elements
         List<String> regions = new ArrayList<String>();
         regions.add("Toute la France");
@@ -99,41 +144,34 @@ public class FragmentTopConcert extends Fragment {
         regions.add("Occitanie");
         regions.add("Pays de la Loire");
         regions.add("Provence-Alpes-Côte d'Azur");
-
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataSpinnerAdapter = new ArrayAdapter<String>(super.getContext(), android.R.layout.simple_spinner_item, regions);
-
-        // Drop down layout style - list view with radio button
-        dataSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // attaching data adapter to spinner
-        spinner.setAdapter(dataSpinnerAdapter);
-
-        // Spinner click listener
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
-                // On selecting a spinner item
-                String item = parent.getItemAtPosition(position).toString();
-
-                // Showing selected spinner item
-                Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
-                textViewChoixRegion.setText(item);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
+        return regions;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_top_concert,container,false);
-        textViewChoixRegion = (TextView) view.findViewById(R.id.textViewChoixRegion);
-        return view;
+    private List<Musique> genererTopMusique(){
+        List<Musique> musique = new ArrayList<Musique>();
+        musique.add(new Musique(R.drawable.michaelcalfan, "MICHAEL CALFAN"));
+        musique.add(new Musique(R.drawable.hardwell, "HARDWELL"));
+        musique.add(new Musique(R.drawable.afrojack, "AFROJACK"));
+        musique.add(new Musique(R.drawable.lostfrequencies, "LOST FREQUENCIES"));
+        musique.add(new Musique(R.drawable.brokenback, "BROKEN BACK"));
+        return musique;
+    }
+
+    private List<Concert> genererTopConcert(){
+        List<Concert> concert = new ArrayList<Concert>();
+        concert.add(new Concert("Le Bikini", "RAMONVILLE","01-12-2016 20:00:00",300));
+        concert.add(new Concert("Zénith de Toulouse", "TOULOUSE","12-01-2017 21:00:00",300));
+        concert.add(new Concert("Le Rex", "TOULOUSE","16-12-2017 22:00:00",300));
+        concert.add(new Concert("Le Métronum", "TOULOUSE","20-12-2016 23:00:00",300));
+        concert.add(new Concert("Le Bikini", "Ramonville","15-12-2016 20:00:00",300));
+        return concert;
+    }
+
+    private void afficherListeMusique(){
+        List<Musique> musique = genererTopMusique();
+
+        MusiqueAdapter adapter = new MusiqueAdapter(getView().getContext(), musique);
+        ListViewConcerts.setAdapter(adapter);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
