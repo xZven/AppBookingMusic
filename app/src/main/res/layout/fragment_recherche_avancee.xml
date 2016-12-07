@@ -50,7 +50,7 @@
                         android:textStyle="normal|italic"
                         android:textColor="?attr/colorControlNormal"
                         android:layout_weight="1"
-                        android:layout_width="250dp" />
+                        android:layout_width="300dp" />
 
                 </LinearLayout>
 
@@ -90,7 +90,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp">
 
-                <Spinner>
+                <Spinner android:id="@+id/spinnerGenre">
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/spinnerGenre" </Spinner>
@@ -137,13 +137,24 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
                         android:text="DD/MM/YYYY"
-                        android:ems="10"
                         android:id="@+id/editTextDateDu"
+                        android:focusableInTouchMode="true"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:inputType="textPersonName"
+                        android:text="DD/MM/YYYY"
+                        android:id="@+id/editTextDateAu"
+                        android:focusableInTouchMode="true"
                         android:textSize="16sp" />
                 </LinearLayout>
             </TableRow>
@@ -210,10 +221,10 @@
                 android:layout_marginTop="5dp" >
 
                 <Button
-                    android:text="Valider"
+                    android:text="Rechercher"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/buttonValiderInscription"
+                    android:id="@+id/buttonRechercheAvance"
                     android:layout_weight="1" />
             </TableRow>
 
