@@ -43,6 +43,15 @@ public class StartActivity extends AppCompatActivity
             ft.replace(R.id.fragment,fragmentTopConcert);
             ft.commit();
         }
+        //
+        ConnectionManagerFragmentENC CMF_ENC = null;
+        CMF_ENC = new ConnectionManagerFragmentENC();
+        if (CMF_ENC != null)
+        {
+            android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.fragmentCM,CMF_ENC);
+            ft.commit();
+        }
      }
 
 

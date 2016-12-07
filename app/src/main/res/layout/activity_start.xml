@@ -53,11 +53,11 @@
                 android:layout_height="wrap_content"
                 android:name="net.stri.m2.appbookingmusic.ConnectionManagerFragmentENC"
                 android:id="@+id/fragmentCM"
-                tools:layout="@layout/fragment_connection_manager_enc"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="11dp"
-                class="net.stri.m2.appbookingmusic.ConnectionManagerFragmentENC" />
+                class="net.stri.m2.appbookingmusic.ConnectionManager"
+                tools:layout="@layout/fragment_connection_manager" />
 
             <ProgressBar
                 style="?android:attr/progressBarStyleSmall"
