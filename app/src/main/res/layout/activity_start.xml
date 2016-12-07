@@ -34,17 +34,6 @@
                 android:contentDescription="@string/imageButtonLogo"
                 android:onClick="acceuil" />
 
-            <fragment
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:name="net.stri.m2.appbookingmusic.ConnectionManagerFragmentENC"
-                android:id="@+id/connectionManagerIncluder"
-                tools:layout="@layout/fragment_connection_manager_enc"
-                android:layout_weight="1"
-                android:layout_alignBottom="@+id/imageButton3"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="21dp" />
-
             <TextView
                 android:text="@string/app_name"
                 android:layout_width="wrap_content"
@@ -59,15 +48,26 @@
                 android:typeface="normal"
                 android:lineSpacingExtra="8sp" />
 
+            <fragment
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:name="net.stri.m2.appbookingmusic.ConnectionManagerFragmentENC"
+                android:id="@+id/fragmentCM"
+                tools:layout="@layout/fragment_connection_manager_enc"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="11dp"
+                class="net.stri.m2.appbookingmusic.ConnectionManagerFragmentENC" />
+
             <ProgressBar
                 style="?android:attr/progressBarStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/connectionManagerIncluder"
-                android:layout_toEndOf="@+id/imageButton3"
-                android:layout_marginBottom="8dp"
                 android:id="@+id/AppBarProgressBar"
-                android:max="@android:integer/config_shortAnimTime" />
+                android:max="@android:integer/config_shortAnimTime"
+                android:layout_alignBottom="@+id/imageButton3"
+                android:layout_toEndOf="@+id/imageButton3"
+                android:layout_marginStart="11dp" />
 
         </RelativeLayout>
 

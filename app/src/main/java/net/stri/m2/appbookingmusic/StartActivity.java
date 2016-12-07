@@ -1,16 +1,13 @@
 package net.stri.m2.appbookingmusic;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 
 public class StartActivity extends AppCompatActivity
         implements FragmentTopConcert.OnFragmentInteractionListener,
@@ -21,6 +18,7 @@ public class StartActivity extends AppCompatActivity
     private ProgressBar pBar         = null;
     private Button buttonSidentifier = null;
     private Button buttonSinscrire   = null;
+    private Button buttonAcceuil   = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +31,10 @@ public class StartActivity extends AppCompatActivity
         // Recensement des buttons
         this.buttonSidentifier = (Button) findViewById(R.id.buttonConnexion);
         this.buttonSinscrire   = (Button) findViewById(R.id.buttonConnexion);
+        //menu
+        this.buttonAcceuil     = (Button) findViewById(R.id.buttonAccueil);
+
+        // Fragment de départ de l'activité
         Fragment fragmentTopConcert = null;
         fragmentTopConcert = new FragmentTopConcert();
         if (fragmentTopConcert != null)
@@ -43,6 +45,10 @@ public class StartActivity extends AppCompatActivity
         }
      }
 
+
+    public void onFragmentInteraction(Uri uri){
+        //you can leave it empty
+    }
 
     /* les méthodes ci-dessous sont les méthodes qui permettent
      * de définir les actions des boutons de cette activité.
@@ -103,7 +109,13 @@ public class StartActivity extends AppCompatActivity
 
     // boutons menu
 
+    /**
+     * Utilisé par le bouton "Acceuil" du menu qui permet d'afficher
+     * le top_concert_fragment.
+     * @param v
+     */
     public void acceuil(View v){
+        // TODO code for button buttonAcceuil
 
         this.pBar.setVisibility(View.VISIBLE);
         //
@@ -119,26 +131,49 @@ public class StartActivity extends AppCompatActivity
         this.pBar.setVisibility(View.INVISIBLE);
     }
 
+    /**
+     * Utilisé par le bouton "Mes Billets" du menu qui permet d'afficher
+     * les billets réservés.
+     * @param v
+     */
+    public void mesBillets(View v){
+        // TODO code for button buttonMesBillets
+    }
+
+    /**
+     * Utilisé par le bouton "Mon Profil" du menu qui permet d'afficher
+     * le profil de l'utilisateur.
+     * @param v
+     */
+    public void monProfil(View v){
+        // TODO code for button buttonMonProfil
+    }
+
     //
-
-
     public void connexion(View v){
-        this.buttonSidentifier.setEnabled(false);
-        this.buttonSinscrire.setEnabled(false);
+
+        this.pBar.setVisibility(View.VISIBLE);
         //
-        RelativeLayout mainContent = (RelativeLayout) findViewById(R.id.CMFECRelativeLayout);
-        LayoutInflater inflater    = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rootView              = inflater.inflate(R.layout.fragment_start, mainContent, false);
-        // création de la vue qui sera ajouté
-        View           layout      = inflater.inflate(R.layout.fragment_connexion, null);
+        ConnectionManagerFragmentEC CMF_EC = null;
+        CMF_EC = new ConnectionManagerFragmentEC();
+
         //
-        mainContent.removeAllViews();
-        mainContent.addView(layout);
+        if (CMF_EC != null)
+        {
+            android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.fragmentCM,CMF_EC);
+            ft.commit();
+        }
+        //
+        this.pBar.setVisibility(View.INVISIBLE);
+
+        // on bascule ensuite sur l'acceuil.
+
+        this.acceuil(findViewById(R.id.buttonAccueil));
+
     }
 
-    public void onFragmentInteraction(Uri uri){
-        //you can leave it empty
-    }
+
 
 
 }
