@@ -31,7 +31,8 @@
                 android:cropToPadding="false"
                 android:adjustViewBounds="true"
                 style="@android:style/Widget.DeviceDefault.Light.ImageButton"
-                android:contentDescription="@string/imageButtonLogo" />
+                android:contentDescription="@string/imageButtonLogo"
+                android:onClick="acceuil" />
 
             <fragment
                 android:layout_width="wrap_content"
@@ -82,7 +83,8 @@
                 android:layout_height="match_parent"
                 android:id="@+id/buttonAccueil"
                 android:layout_weight="1"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                android:onClick="acceuil" />
 
             <Button
                 android:text="Mes Billets"

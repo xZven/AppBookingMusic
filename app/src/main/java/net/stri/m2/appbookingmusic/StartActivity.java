@@ -90,6 +90,18 @@ public class StartActivity extends AppCompatActivity
         mainContent.addView(layout);
     }
 
+    // boutons menu
+
+    public void acceuil(View v){
+        Fragment fragmentTopConcert = null;
+        fragmentTopConcert = new FragmentTopConcert();
+        if (fragmentTopConcert != null)
+        {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment,fragmentTopConcert);
+            ft.commit();
+        }
+    }
 
     //
 
@@ -111,4 +123,6 @@ public class StartActivity extends AppCompatActivity
     public void onFragmentInteraction(Uri uri){
         //you can leave it empty
     }
+
+
 }
