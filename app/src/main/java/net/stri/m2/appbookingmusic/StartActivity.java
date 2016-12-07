@@ -62,37 +62,51 @@ public class StartActivity extends AppCompatActivity
     // Connection Manager Fragment methods
     public void sIndentifier(View v) {
 
-        this.buttonSidentifier.setEnabled(false);
-        this.buttonSinscrire.setEnabled(true);
+    //    this.buttonSidentifier.setEnabled(false)
+    //    this.buttonSinscrire.setEnabled(true);
+
+        this.pBar.setVisibility(View.VISIBLE);
         //
-        RelativeLayout mainContent = (RelativeLayout) findViewById(R.id.fragment);
-        LayoutInflater inflater    = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rootView              = inflater.inflate(R.layout.fragment_start, mainContent, false);
-        // création de la vue qui sera ajouté
-        View           layout      = inflater.inflate(R.layout.fragment_connexion, null);
+        FragmentConnexion fragmentConnexion = null;
+        fragmentConnexion = new FragmentConnexion();
         //
-        mainContent.removeAllViews();
-        mainContent.addView(layout);
+        if (fragmentConnexion != null)
+        {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment,fragmentConnexion);
+            ft.commit();
+        }
+        //
+        this.pBar.setVisibility(View.INVISIBLE);
+
     }
 
     public void sInscrire(View v){
 
-        this.buttonSidentifier.setEnabled(true);
-        this.buttonSinscrire.setEnabled(false);
+    //    this.buttonSidentifier.setEnabled(true);
+    //    this.buttonSinscrire.setEnabled(false);
         //
-        RelativeLayout mainContent = (RelativeLayout) findViewById(R.id.fragment);
-        LayoutInflater inflater    = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rootView              = inflater.inflate(R.layout.fragment_start, mainContent, false);
-        // création de la vue qui sera ajouté
-        View           layout      = inflater.inflate(R.layout.fragment_inscription, null);
+        this.pBar.setVisibility(View.VISIBLE);
         //
-        mainContent.removeAllViews();
-        mainContent.addView(layout);
+        FragmentInscription fragmentInscription = null;
+        fragmentInscription = new FragmentInscription();
+        //
+        if (fragmentInscription != null)
+        {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment,fragmentInscription);
+            ft.commit();
+        }
+        //
+        this.pBar.setVisibility(View.INVISIBLE);
     }
 
     // boutons menu
 
     public void acceuil(View v){
+
+        this.pBar.setVisibility(View.VISIBLE);
+        //
         Fragment fragmentTopConcert = null;
         fragmentTopConcert = new FragmentTopConcert();
         if (fragmentTopConcert != null)
@@ -101,6 +115,8 @@ public class StartActivity extends AppCompatActivity
             ft.replace(R.id.fragment,fragmentTopConcert);
             ft.commit();
         }
+        //
+        this.pBar.setVisibility(View.INVISIBLE);
     }
 
     //

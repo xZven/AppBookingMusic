@@ -67,8 +67,7 @@
                 android:layout_toEndOf="@+id/imageButton3"
                 android:layout_marginBottom="8dp"
                 android:id="@+id/AppBarProgressBar"
-                android:max="@android:integer/config_shortAnimTime"
-                android:visibility="invisible" />
+                android:max="@android:integer/config_shortAnimTime" />
 
         </RelativeLayout>
 
@@ -84,7 +83,8 @@
                 android:id="@+id/buttonAccueil"
                 android:layout_weight="1"
                 android:textSize="15dp"
-                android:onClick="acceuil" />
+                android:onClick="acceuil"
+                android:backgroundTint="@android:color/black" />
 
             <Button
                 android:text="Mes Billets"
@@ -94,7 +94,8 @@
                 android:layout_weight="1"
                 android:layout_toEndOf="@+id/buttonAccueil"
                 android:layout_alignStart="@+id/buttonAccueil"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                android:backgroundTint="@android:color/background_dark" />
 
             <Button
                 android:text="Mon Profil"
@@ -102,7 +103,8 @@
                 android:layout_height="match_parent"
                 android:id="@+id/buttonMonProfil"
                 android:layout_weight="1"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                android:backgroundTint="@android:color/background_dark" />
 
         </LinearLayout>
 
