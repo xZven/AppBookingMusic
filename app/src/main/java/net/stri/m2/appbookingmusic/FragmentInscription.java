@@ -3,10 +3,14 @@ package net.stri.m2.appbookingmusic;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
+import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 
 /**
@@ -58,6 +62,12 @@ public class FragmentInscription extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+    }
+
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
+
+        super.onViewCreated(view, savedInstanceState);
+        Button validerInscription = (Button) view.findViewById(R.id.buttonValiderInscription);
     }
 
     @Override

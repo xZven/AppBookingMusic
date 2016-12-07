@@ -1,6 +1,7 @@
 package net.stri.m2.appbookingmusic;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -11,7 +12,11 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
-public class StartActivity extends AppCompatActivity {
+public class StartActivity extends AppCompatActivity
+        implements FragmentTopConcert.OnFragmentInteractionListener,
+        FragmentRechercheAvancee.OnFragmentInteractionListener,
+        FragmentConnexion.OnFragmentInteractionListener,
+        FragmentInscription.OnFragmentInteractionListener{
 
     private ProgressBar pBar         = null;
     private Button buttonSidentifier = null;
@@ -101,5 +106,9 @@ public class StartActivity extends AppCompatActivity {
         //
         mainContent.removeAllViews();
         mainContent.addView(layout);
+    }
+
+    public void onFragmentInteraction(Uri uri){
+        //you can leave it empty
     }
 }

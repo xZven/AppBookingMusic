@@ -1,38 +1,37 @@
 package net.stri.m2.appbookingmusic;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link FragmentTopConcert.OnFragmentInteractionListener} interface
+ * {@link FragmentRechercheAvancee.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link FragmentTopConcert#newInstance} factory method to
+ * Use the {@link FragmentRechercheAvancee#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentTopConcert extends Fragment {
+public class FragmentRechercheAvancee extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -44,10 +43,9 @@ public class FragmentTopConcert extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    TextView textViewChoixRegion;
-    ListView ListViewConcerts;
+    EditText editTextDateDu;
 
-    public FragmentTopConcert() {
+    public FragmentRechercheAvancee() {
         // Required empty public constructor
     }
 
@@ -57,16 +55,43 @@ public class FragmentTopConcert extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentTopConcert.
+     * @return A new instance of fragment FragmentRechercheAvancee.
      */
     // TODO: Rename and change types and number of parameters
-    public static FragmentTopConcert newInstance(String param1, String param2) {
-        FragmentTopConcert fragment = new FragmentTopConcert();
+    public static FragmentRechercheAvancee newInstance(String param1, String param2) {
+        FragmentRechercheAvancee fragment = new FragmentRechercheAvancee();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
+
+        super.onViewCreated(view, savedInstanceState);
+
+        Spinner spinner = (Spinner) view.findViewById(R.id.spinnerRegion);
+        ArrayAdapter<String> dataSpinnerAdapter = new ArrayAdapter<String>(super.getContext(), android.R.layout.simple_spinner_item, genererListeRegions());
+        dataSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataSpinnerAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
+                String item = parent.getItemAtPosition(position).toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+        /*editTextDateDu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                showDatePicker();
+            }
+        });*/
     }
 
     @Override
@@ -78,63 +103,12 @@ public class FragmentTopConcert extends Fragment {
         }
     }
 
-    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState){
-
-        super.onViewCreated(view, savedInstanceState);
-
-        // Spinner element
-        Spinner spinner = (Spinner) view.findViewById(R.id.spinnerRegion);
-
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataSpinnerAdapter = new ArrayAdapter<String>(super.getContext(), android.R.layout.simple_spinner_item, genererListeRegions());
-
-        // Drop down layout style - list view with radio button
-        dataSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // attaching data adapter to spinner
-        spinner.setAdapter(dataSpinnerAdapter);
-
-        // Spinner click listener
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
-                // On selecting a spinner item
-                String item = parent.getItemAtPosition(position).toString();
-
-                // Showing selected spinner item
-                //Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
-                textViewChoixRegion.setText(item);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
-
-        afficherListeConcert();
-        android.support.design.widget.FloatingActionButton buttonSearchAdvanced = (android.support.design.widget.FloatingActionButton) view.findViewById(R.id.ButtonSearchAdvanced);
-        buttonSearchAdvanced.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment fragmentRechercheAvancee = null;
-                fragmentRechercheAvancee = new FragmentRechercheAvancee();
-                if (fragmentRechercheAvancee != null)
-                {
-                    FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    ft.replace(R.id.fragment,fragmentRechercheAvancee);
-                    ft.commit();
-                }
-            }
-        });
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_top_concert,container,false);
-        textViewChoixRegion = (TextView) view.findViewById(R.id.textViewChoixRegion);
-        ListViewConcerts = (ListView) view.findViewById(R.id.ListViewConcerts);
+        View view=inflater.inflate(R.layout.fragment_recherche_avancee,container,false);
+        EditText editTextDateDu = (EditText) view.findViewById(R.id.editTextDateDu);
         return view;
     }
 
@@ -163,22 +137,6 @@ public class FragmentTopConcert extends Fragment {
         return regions;
     }
 
-    private List<Concert> genererTopConcert(){
-        List<Concert> concert = new ArrayList<Concert>();
-        concert.add(new Concert("MICHAEL CALFAN",R.drawable.michaelcalfan,"Le Bikini", "RAMONVILLE","01-12-2016 20:00:00",300,0));
-        concert.add(new Concert("HARDWELL",R.drawable.hardwell,"Zénith de Toulouse", "TOULOUSE","12-01-2017 21:00:00",300,300));
-        concert.add(new Concert("AFROJACK",R.drawable.afrojack,"Le Rex", "TOULOUSE","16-12-2017 22:00:00",300,0));
-        concert.add(new Concert("LOST FREQUENCIES",R.drawable.lostfrequencies,"Le Métronum", "TOULOUSE","20-12-2016 23:00:00",300,0));
-        concert.add(new Concert("BROKEN BACK",R.drawable.brokenback,"Le Bikini", "Ramonville","15-12-2016 20:00:00",300,0));
-        return concert;
-    }
-
-    private void afficherListeConcert(){
-        List<Concert> concert = genererTopConcert();
-
-        ConcertAdapter adapter = new ConcertAdapter(getView().getContext(), concert);
-        ListViewConcerts.setAdapter(adapter);
-    }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -189,12 +147,12 @@ public class FragmentTopConcert extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        /*if (context instanceof OnFragmentInteractionListener) {
+        if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
-        }*/
+        }
     }
 
     @Override
@@ -217,4 +175,31 @@ public class FragmentTopConcert extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    private void showDatePicker() {
+        DatePickerFragment date = new DatePickerFragment();
+        /**
+         * Set Up Current Date Into dialog
+         */
+        Calendar calender = Calendar.getInstance();
+        Bundle args = new Bundle();
+        args.putInt("year", calender.get(Calendar.YEAR));
+        args.putInt("month", calender.get(Calendar.MONTH));
+        args.putInt("day", calender.get(Calendar.DAY_OF_MONTH));
+        date.setArguments(args);
+        /**
+         * Set Call back to capture selected date
+         */
+        date.setCallBack(ondate);
+        date.show(getFragmentManager(), "Date Picker");
+    }
+    DatePickerDialog.OnDateSetListener ondate = new DatePickerDialog.OnDateSetListener() {
+
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+
+            editTextDateDu.setText(String.valueOf(dayOfMonth) + "-" + String.valueOf(monthOfYear+1)
+                    + "-" + String.valueOf(year));
+        }
+    };
 }
