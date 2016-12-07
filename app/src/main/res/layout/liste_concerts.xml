@@ -25,5 +25,48 @@
         tools:text="Artiste"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/salle"
+        android:textSize="16dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/artiste"
+        android:layout_toRightOf="@+id/jaquette"
+        tools:text="Salle"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ville"
+        android:textSize="16dp"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/salle"
+        android:layout_below="@+id/artiste"
+        tools:text="Ville"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/date"
+        android:textSize="16dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/salle"
+        android:layout_toRightOf="@+id/jaquette"
+        tools:text="Date"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/complet"
+        android:textSize="16dp"
+        android:layout_toEndOf="@+id/date"
+        android:layout_below="@+id/salle"
+        android:layout_marginLeft="5dp"
+        tools:text="Complet"
+        />
 
 </RelativeLayout>

@@ -9,25 +9,43 @@ import java.util.Date;
  */
 
 public class Concert {
+    private String artiste;
+    private int cheminJaquette;
     private String salle;
     private String ville;
     private Date date;
-    private int nbPlaceTotale;
-    private int nbPlaceVendu;
+    private Integer nbPlaceTotale;
+    private Integer nbPlaceVendu;
 
-    public Concert(String salle, String ville, String date, int nbPlaceTotale){
+    public Concert(String artiste, int cheminJaquette,String salle, String ville, String dateString, Integer nbPlaceTotale, Integer nbPlaceVendu){
+        this.artiste=artiste;
+        this.cheminJaquette = cheminJaquette;
         this.salle=salle;
         this.ville = ville;
         this.nbPlaceTotale = nbPlaceTotale;
+        this.nbPlaceVendu = nbPlaceVendu;
         SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-        String dateInString = "31-08-1982 10:20:56";
-        Date NewDate = null;
         try {
-            NewDate = sdf.parse(date);
+            this.date = sdf.parse(dateString);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        this.date = NewDate;
+    }
+
+    public String getArtiste() {
+        return artiste;
+    }
+
+    public void setArtiste(String artiste) {
+        this.artiste = artiste;
+    }
+
+    public int getCheminJaquette() {
+        return cheminJaquette;
+    }
+
+    public void setCheminJaquette(int color) {
+        this.cheminJaquette = cheminJaquette;
     }
 
     public String getSalle() {
@@ -52,17 +70,25 @@ public class Concert {
 
     public void setDate(Date date) {this.date = date; }
 
-    public int getNbPlaceTotale() {
+    public Integer getNbPlaceTotale() {
         return nbPlaceTotale;
     }
 
-    public void setNbPlaceTotale(int nbPlaceTotale) {this.nbPlaceTotale = nbPlaceTotale; }
+    public void setNbPlaceTotale(Integer nbPlaceTotale) {this.nbPlaceTotale = nbPlaceTotale; }
 
-    public int getNbPlaceVendu(int nbPlaceVendu) {
+    public Integer getNbPlaceVendu() {
         return nbPlaceVendu;
     }
 
-    public void setNbPlaceVendu(int nbPlaceVendu) {
+    public void setNbPlaceVendu(Integer nbPlaceVendu) {
         this.nbPlaceVendu = nbPlaceVendu;
     }
+
+    public String getComplet(){
+        if (this.nbPlaceTotale.compareTo(nbPlaceVendu) == 0)
+        {
+            return "Complet";
+        };
+        return "";
+    };
 }

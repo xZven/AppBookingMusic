@@ -108,8 +108,7 @@ public class FragmentTopConcert extends Fragment {
             }
         });
 
-        afficherListeMusique();
-        genererTopConcert();
+        afficherListeConcert();
     }
 
     @Override
@@ -147,33 +146,22 @@ public class FragmentTopConcert extends Fragment {
         return regions;
     }
 
-    private List<Musique> genererTopMusique(){
-        List<Musique> musique = new ArrayList<Musique>();
-        musique.add(new Musique(R.drawable.michaelcalfan, "MICHAEL CALFAN"));
-        musique.add(new Musique(R.drawable.hardwell, "HARDWELL"));
-        musique.add(new Musique(R.drawable.afrojack, "AFROJACK"));
-        musique.add(new Musique(R.drawable.lostfrequencies, "LOST FREQUENCIES"));
-        musique.add(new Musique(R.drawable.brokenback, "BROKEN BACK"));
-        return musique;
-    }
-
     private List<Concert> genererTopConcert(){
         List<Concert> concert = new ArrayList<Concert>();
-        concert.add(new Concert("Le Bikini", "RAMONVILLE","01-12-2016 20:00:00",300));
-        concert.add(new Concert("Zénith de Toulouse", "TOULOUSE","12-01-2017 21:00:00",300));
-        concert.add(new Concert("Le Rex", "TOULOUSE","16-12-2017 22:00:00",300));
-        concert.add(new Concert("Le Métronum", "TOULOUSE","20-12-2016 23:00:00",300));
-        concert.add(new Concert("Le Bikini", "Ramonville","15-12-2016 20:00:00",300));
+        concert.add(new Concert("MICHAEL CALFAN",R.drawable.michaelcalfan,"Le Bikini", "RAMONVILLE","01-12-2016 20:00:00",300,0));
+        concert.add(new Concert("HARDWELL",R.drawable.hardwell,"Zénith de Toulouse", "TOULOUSE","12-01-2017 21:00:00",300,300));
+        concert.add(new Concert("AFROJACK",R.drawable.afrojack,"Le Rex", "TOULOUSE","16-12-2017 22:00:00",300,0));
+        concert.add(new Concert("LOST FREQUENCIES",R.drawable.lostfrequencies,"Le Métronum", "TOULOUSE","20-12-2016 23:00:00",300,0));
+        concert.add(new Concert("BROKEN BACK",R.drawable.brokenback,"Le Bikini", "Ramonville","15-12-2016 20:00:00",300,0));
         return concert;
     }
 
-    private void afficherListeMusique(){
-        List<Musique> musique = genererTopMusique();
+    private void afficherListeConcert(){
+        List<Concert> concert = genererTopConcert();
 
-        MusiqueAdapter adapter = new MusiqueAdapter(getView().getContext(), musique);
+        ConcertAdapter adapter = new ConcertAdapter(getView().getContext(), concert);
         ListViewConcerts.setAdapter(adapter);
     }
-
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
