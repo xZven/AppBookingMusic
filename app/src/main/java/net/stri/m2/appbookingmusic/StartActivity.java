@@ -160,6 +160,7 @@ public class StartActivity extends AppCompatActivity
         //
         if (CMF_EC != null)
         {
+            //
             android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.fragmentCM,CMF_EC);
             ft.commit();
