@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentTransaction;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,6 +52,7 @@ public class FragmentRechercheAvancee extends Fragment
 
     EditText editTextDateDu;
     EditText editTextDateAu;
+    Button buttonRechercheAvance;
 
     public FragmentRechercheAvancee() {
         // Required empty public constructor
@@ -107,6 +109,21 @@ public class FragmentRechercheAvancee extends Fragment
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+        Button buttonRechercheAvance = (Button) view.findViewById(R.id.buttonRechercheAvance);
+        buttonRechercheAvance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragmentMaRecherche = null;
+                fragmentMaRecherche = new FragmentMaRecherche();
+                if (fragmentMaRecherche != null)
+                {
+                    FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    ft.replace(R.id.fragment,fragmentMaRecherche);
+                    ft.commit();
+                }
+            }
+        });
+
     }
 
     @Override
