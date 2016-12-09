@@ -36,32 +36,38 @@
                     android:textStyle="normal|italic"
                     android:textColor="?attr/colorControlNormal"
                     android:layout_weight="1"
-                    android:layout_width="250dp" />
+                    android:layout_width="190dp" />
 
-                <android.support.design.widget.FloatingActionButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    app:srcCompat="@android:drawable/btn_plus"
-                    android:id="@+id/ButtonSearchAdvanced"
-                    app:backgroundTint="@android:color/holo_blue_light"
-                    app:rippleColor="@android:color/transparent"
+                <ImageView
+                    android:layout_width="40dp"
+                    app:srcCompat="@drawable/logorecherche"
+                    android:id="@+id/buttonSearchAdvanced"
                     android:layout_weight="1"
-                    app:fabSize="mini" />
+                    android:layout_height="50dp" />
+
             </LinearLayout>
 
         </TableRow>
 
-        <TableRow>
+        <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="5dp">
 
-            <Spinner
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/spinnerRegion" />
+                android:layout_height="match_parent"
+                android:weightSum="1">
+
+                <Spinner
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinnerRegion"
+                    android:layout_width="245dp"
+                    android:layout_weight="0.78" />
+            </LinearLayout>
+
         </TableRow>
 
         <TableRow

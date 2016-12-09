@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -113,7 +114,7 @@ public class FragmentTopConcert extends Fragment {
         });
 
         afficherListeConcert();
-        android.support.design.widget.FloatingActionButton buttonSearchAdvanced = (android.support.design.widget.FloatingActionButton) view.findViewById(R.id.ButtonSearchAdvanced);
+        ImageView buttonSearchAdvanced = (ImageView) view.findViewById(R.id.buttonSearchAdvanced);
         buttonSearchAdvanced.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

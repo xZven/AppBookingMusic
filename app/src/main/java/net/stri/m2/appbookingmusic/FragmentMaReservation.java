@@ -3,26 +3,22 @@ package net.stri.m2.appbookingmusic;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentTransaction;
-import android.text.TextUtils;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link FragmentInscription.OnFragmentInteractionListener} interface
+ * {@link FragmentMaReservation.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link FragmentInscription#newInstance} factory method to
+ * Use the {@link FragmentMaReservation#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentInscription extends Fragment {
+public class FragmentMaReservation extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -34,7 +30,7 @@ public class FragmentInscription extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public FragmentInscription() {
+    public FragmentMaReservation() {
         // Required empty public constructor
     }
 
@@ -44,11 +40,11 @@ public class FragmentInscription extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentInscription.
+     * @return A new instance of fragment FragmentMaReservation.
      */
     // TODO: Rename and change types and number of parameters
-    public static FragmentInscription newInstance(String param1, String param2) {
-        FragmentInscription fragment = new FragmentInscription();
+    public static FragmentMaReservation newInstance(String param1, String param2) {
+        FragmentMaReservation fragment = new FragmentMaReservation();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,29 +61,18 @@ public class FragmentInscription extends Fragment {
         }
     }
 
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
-
-        super.onViewCreated(view, savedInstanceState);
-        Button buttonValiderInscription = (Button) view.findViewById(R.id.buttonValiderInscription);
-        buttonValiderInscription.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment fragmentConnexion = null;
-                fragmentConnexion = new FragmentConnexion();
-                if (fragmentConnexion != null) {
-                    FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    ft.replace(R.id.fragment, fragmentConnexion);
-                    ft.commit();
-                }
-            }
-        });
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_inscription, container, false);
+        View view = inflater.inflate(R.layout.fragment_ma_reservation, container, false);
+        return view;
+    }
+
+    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState){
+
+        super.onViewCreated(view, savedInstanceState);
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
