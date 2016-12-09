@@ -1,6 +1,7 @@
 package net.stri.m2.appbookingmusic;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -178,6 +179,19 @@ public class FragmentTopConcert extends Fragment {
 
         ConcertAdapter adapter = new ConcertAdapter(getView().getContext(), concert);
         ListViewConcerts.setAdapter(adapter);
+        ListViewConcerts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Fragment fragmentBillet = null;
+                fragmentBillet = new FragmentBillet();
+                if (fragmentBillet != null)
+                {
+                    FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    ft.replace(R.id.fragment,fragmentBillet);
+                    ft.commit();
+                }
+            }
+        });
     }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

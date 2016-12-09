@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/jaquette">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/jaquette"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    tools:background="#AAA"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/salle"
+                    android:textSize="16dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_below="@+id/artiste"
+                    android:layout_toRightOf="@+id/jaquette"
+                    tools:text="Salle"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/date"
+                    android:textSize="16dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_below="@+id/salle"
+                    android:layout_toRightOf="@+id/jaquette"
+                    tools:text="Date"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/complet"
+                    android:textSize="16dp"
+                    android:layout_toEndOf="@+id/date"
+                    android:layout_below="@+id/salle"
+                    android:layout_marginLeft="5dp"
+                    tools:text="Complet"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ville"
+                    android:textSize="16dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toEndOf="@+id/salle"
+                    android:layout_below="@+id/artiste"
+                    tools:text="Ville"
+                    />
+
+                <TextView
+                    android:id="@+id/artiste"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:textSize="16dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/jaquette"
+                    android:layout_alignTop="@+id/jaquette"
+                    tools:text="Artiste"
+                    />
+            </RelativeLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:text="32 €"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewPrix"
+                android:textSize="40sp"
+                android:textStyle="normal|bold" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Spinner
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinnerNbPlace"
+                    android:layout_weight="1"
+                    android:layout_width="150dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:text="places"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textViewPlace"
+                        android:textSize="16sp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:text="Plus de musiques avec :"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:id="@+id/textViewPlusDeMusique"
+                        android:textSize="16sp"
+                        android:layout_weight="1" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/logospotify"
+                    tools:background="#AAA"
+                    app:srcCompat="@drawable/spotifylogo"
+                    android:layout_weight="1"
+                    android:layout_gravity="left"
+                    android:layout_height="40dp"
+                    android:layout_width="40dp" />
+
+                <ImageView
+                    android:id="@+id/logosoundclound"
+                    tools:background="#AAA"
+                    app:srcCompat="@drawable/soundcloudlogo"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
+
+                <ImageView
+                    android:id="@+id/logoyoutube"
+                    tools:background="#AAA"
+                    app:srcCompat="@drawable/youtubelogo"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <Button
+                android:text="Réserver"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonReserver"
+                android:layout_weight="1"
+                android:layout_width="50dp" />
+        </TableRow>
+
+        <TableRow>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+
+            <View
+                android:id="@+id/SplitLine3"
+                android:layout_width="match_parent"
+                android:layout_height= "2dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:background="#b7c0c7" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+            android:id="@+id/maps"
+            tools:background="#AAA"
+            android:layout_weight="1"
+                app:srcCompat="@drawable/mapslogo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:adjustViewBounds="false" />
+
+            <Button
+                android:text="Situer le lieu du concert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonMaps" />
+        </TableRow>
+
+        <TableRow>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+
+            <View
+                android:id="@+id/SplitLine4"
+                android:layout_width="match_parent"
+                android:layout_height= "2dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:background="#b7c0c7" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:text="Détails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewDetails"
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:text="Description de l'artiste"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:id="@+id/textViewDescription" />
+        </TableRow>
+
+    </TableLayout>
+</FrameLayout>

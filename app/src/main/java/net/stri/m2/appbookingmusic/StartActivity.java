@@ -14,7 +14,9 @@ public class StartActivity extends AppCompatActivity
         FragmentRechercheAvancee.OnFragmentInteractionListener,
         FragmentConnexion.OnFragmentInteractionListener,
         FragmentInscription.OnFragmentInteractionListener,
-        FragmentMaRecherche.OnFragmentInteractionListener{
+        FragmentMaRecherche.OnFragmentInteractionListener,
+        FragmentBillet.OnFragmentInteractionListener,
+        FragmentPaiement.OnFragmentInteractionListener{
 
     private ProgressBar pBar         = null;
     private Button buttonSidentifier = null;
