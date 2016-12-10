@@ -1,6 +1,6 @@
 package net.stri.m2.appbookingmusic;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -66,7 +66,8 @@ public class ConnectionManagerFragmentENC extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_connection_manager_enc, container, false);
+        View view = inflater.inflate(R.layout.fragment_connection_manager_enc, container, false);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,7 +71,7 @@ public class FragmentBillet extends Fragment {
         }
     }
 
-    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState){
+    public void onViewCreated(final View view, @Nullable final Bundle savedInstanceState){
 
         super.onViewCreated(view, savedInstanceState);
 
@@ -93,12 +94,27 @@ public class FragmentBillet extends Fragment {
         buttonReserver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragmentPaiement = null;
-                fragmentPaiement = new FragmentPaiement();
-                if (fragmentPaiement != null) {
-                    FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    ft.replace(R.id.fragment, fragmentPaiement);
-                    ft.commit();
+                ConnectionManagerFragmentENC fm = (ConnectionManagerFragmentENC) getFragmentManager().findFragmentById(R.id.fragmentCM);
+                if(fm==null|| !fm.isInLayout())
+                {
+                    Toast.makeText(getContext(), "Veuillez vous connecter avant de réserver un billet s'il vous plaît. ", Toast.LENGTH_LONG).show();
+                    Fragment fragmentConnexion = null;
+                    fragmentConnexion = new FragmentConnexion();
+                    if (fragmentConnexion != null) {
+                        FragmentTransaction ft = getFragmentManager().beginTransaction();
+                        ft.replace(R.id.fragment, fragmentConnexion);
+                        ft.commit();
+                    }
+                }
+                else
+                {
+                    Fragment fragmentPaiement = null;
+                    fragmentPaiement = new FragmentPaiement();
+                    if (fragmentPaiement != null) {
+                        FragmentTransaction ft = getFragmentManager().beginTransaction();
+                        ft.replace(R.id.fragment, fragmentPaiement);
+                        ft.commit();
+                    }
                 }
             }
         });

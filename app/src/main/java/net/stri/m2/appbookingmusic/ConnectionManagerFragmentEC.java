@@ -1,12 +1,15 @@
 package net.stri.m2.appbookingmusic;
 
-import android.app.Fragment;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 
 /**
@@ -64,7 +67,29 @@ public class ConnectionManagerFragmentEC extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_connection_manager_fragment_ec, container, false);
+        View view = inflater.inflate(R.layout.fragment_connection_manager_fragment_ec, container, false);
+        return view;
+    }
+
+    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState){
+
+        super.onViewCreated(view, savedInstanceState);
+        ImageView imageViewLogout = (ImageView) view.findViewById(R.id.imageViewLogout);
+        imageViewLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment connectionManagerFragmentENC = null;
+                connectionManagerFragmentENC = new ConnectionManagerFragmentENC();
+                Fragment fragmentTopConcert = null;
+                fragmentTopConcert = new FragmentTopConcert();
+                if (connectionManagerFragmentENC != null) {
+                    FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    ft.replace(R.id.fragmentCM, connectionManagerFragmentENC);
+                    ft.replace(R.id.fragment, fragmentTopConcert);
+                    ft.commit();
+                }
+            }
+        });
     }
 
     // TODO: Rename method, update argument and hook method into UI event

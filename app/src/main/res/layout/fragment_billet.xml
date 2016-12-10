@@ -100,12 +100,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" >
 
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
@@ -115,13 +109,13 @@
 
                         <LinearLayout
                             android:orientation="vertical"
-                            android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="1">
+                            android:layout_width="150dp"
+                            android:weightSum="1">
 
                             <TextView
                                 android:text="32 €"
-                                android:layout_width="match_parent"
+                                android:layout_width="114dp"
                                 android:layout_height="68dp"
                                 android:layout_marginTop="15dp"
                                 android:id="@+id/textViewPrix"
@@ -129,34 +123,36 @@
                                 android:textStyle="normal|bold"
                                 android:textAlignment="center" />
 
+                            <TextView
+                                android:text="Quantité :"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textViewPlace"
+                                android:textSize="16sp"
+                                android:layout_weight="0.59" />
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="166dp"
+                                android:layout_height="36dp"
+                                android:weightSum="1">
+
+                                <Spinner
+                                    android:layout_height="34dp"
+                                    android:id="@+id/spinnerNbPlace"
+                                    android:layout_weight="0.50"
+                                    android:layout_width="50dp" />
+
+                            </LinearLayout>
+
                             <Button
                                 android:text="Réserver"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/buttonReserver"
                                 android:layout_marginTop="15dp"
                                 android:layout_marginBottom="15dp"
-                                android:layout_width="117dp"
+                                android:layout_width="109dp"
                                 android:textSize="14sp" />
-
-                            <LinearLayout
-                                android:orientation="horizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                                <Spinner
-                                    android:layout_height="wrap_content"
-                                    android:id="@+id/spinnerNbPlace"
-                                    android:layout_width="89dp"
-                                    android:layout_weight="1" />
-
-                                <TextView
-                                    android:text="places"
-                                    android:layout_width="74dp"
-                                    android:layout_height="wrap_content"
-                                    android:id="@+id/textViewPlace"
-                                    android:textSize="16sp"
-                                    android:layout_weight="1" />
-                            </LinearLayout>
 
                         </LinearLayout>
 

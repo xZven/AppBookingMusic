@@ -11,6 +11,8 @@ import android.widget.ProgressBar;
 
 public class StartActivity extends AppCompatActivity
         implements FragmentTopConcert.OnFragmentInteractionListener,
+        ConnectionManagerFragmentEC.OnFragmentInteractionListener,
+        ConnectionManagerFragmentENC.OnFragmentInteractionListener,
         FragmentRechercheAvancee.OnFragmentInteractionListener,
         FragmentConnexion.OnFragmentInteractionListener,
         FragmentInscription.OnFragmentInteractionListener,
@@ -53,7 +55,7 @@ public class StartActivity extends AppCompatActivity
         CMF_ENC = new ConnectionManagerFragmentENC();
         if (CMF_ENC != null)
         {
-            android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragmentCM,CMF_ENC);
             ft.commit();
         }
@@ -174,8 +176,7 @@ public class StartActivity extends AppCompatActivity
         //
         if (CMF_EC != null)
         {
-            //
-            android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragmentCM,CMF_EC);
             ft.commit();
         }

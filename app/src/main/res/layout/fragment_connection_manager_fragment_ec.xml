@@ -17,7 +17,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="8dp"
-            android:id="@+id/imageView"
+            android:id="@+id/imageViewProfil"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -26,7 +26,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/CMFECWelcomeMessage"
-            android:layout_below="@+id/imageView"
-            android:layout_alignEnd="@+id/imageView" />
+            android:layout_marginTop="11dp"
+            android:layout_below="@+id/imageViewProfil"
+            android:layout_toStartOf="@+id/imageViewProfil" />
+
+        <ImageView
+            android:layout_width="20dp"
+            app:srcCompat="@drawable/logout"
+            android:id="@+id/imageViewLogout"
+            android:layout_height="20dp"
+            android:layout_alignBottom="@+id/CMFECWelcomeMessage"
+            android:layout_alignEnd="@+id/imageViewProfil" />
     </RelativeLayout>
 </FrameLayout>
