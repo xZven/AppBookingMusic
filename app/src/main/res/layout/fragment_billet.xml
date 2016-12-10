@@ -281,10 +281,13 @@
 
                     <TextView
                         android:text="Description de l'artiste"
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:id="@+id/textViewDescription" />
+                        android:inputType="textMultiLine"
+                        android:layout_marginRight="80dp"
+                        android:id="@+id/textViewDescription"
+                        android:layout_width="wrap_content" />
+
                 </TableRow>
 
             </TableLayout>

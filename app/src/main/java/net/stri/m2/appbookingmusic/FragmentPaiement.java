@@ -10,8 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
 
 
 /**
@@ -31,6 +35,8 @@ public class FragmentPaiement extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private static Concert concert;
+    private static Integer nbPlace;
 
     private OnFragmentInteractionListener mListener;
 
@@ -38,21 +44,10 @@ public class FragmentPaiement extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentPaiement.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentPaiement newInstance(String param1, String param2) {
+    public static FragmentPaiement newInstance(Concert concertP, Integer nbPlaceP) {
         FragmentPaiement fragment = new FragmentPaiement();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+        concert=concertP;
+        nbPlace=nbPlaceP;
         return fragment;
     }
 
@@ -75,19 +70,38 @@ public class FragmentPaiement extends Fragment {
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState){
 
         super.onViewCreated(view, savedInstanceState);
+
+        //Initialisation du billet
+        //Initialisation des éléments du layout
+        ImageView jaquette = (ImageView) view.findViewById(R.id.jaquette);
+        TextView artiste = (TextView) view.findViewById(R.id.artiste);
+        TextView salle = (TextView) view.findViewById(R.id.salle);
+        TextView ville = (TextView) view.findViewById(R.id.ville);
+        TextView date = (TextView) view.findViewById(R.id.date);
         TextView editTextPrix = (TextView) view.findViewById(R.id.editTextPrix);
         TextView editTextNbPlaces = (TextView) view.findViewById(R.id.editTextNbPlaces);
         TextView editTextPrixTotal = (TextView) view.findViewById(R.id.editTextPrixTotal);
-        Integer prix = Integer.parseInt(editTextPrix.getText().toString());
-        Integer nbPlace = Integer.parseInt(editTextNbPlaces.getText().toString());
-        Integer prixTotal = prix*nbPlace;
-        editTextPrixTotal.setText(prixTotal.toString());
         Button buttonPayer = (Button) view.findViewById(R.id.buttonPayer);
+
+        //Saisie des nouvelles informations
+        jaquette.setImageResource(concert.getCheminJaquette());
+        artiste.setText(concert.getArtiste());
+        salle.setText(concert.getSalle());
+        ville.setText(concert.getVille());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy à hh:mm");
+        String dateString = sdf.format(concert.getDate());
+        date.setText(dateString);
+        editTextPrix.setText(concert.getPrix().toString()+" €");
+        editTextNbPlaces.setText(nbPlace.toString());
+        Integer prixTotal = concert.getPrix()*nbPlace;
+        editTextPrixTotal.setText(prixTotal.toString()+" €");
+
+        //Action du bouton payer
         buttonPayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Fragment fragmentPaiementAccepte = null;
-                fragmentPaiementAccepte = new FragmentPaiementAccepte();
+                fragmentPaiementAccepte = FragmentPaiementAccepte.newInstance(concert);
                 if (fragmentPaiementAccepte != null) {
                     FragmentTransaction ft = getFragmentManager().beginTransaction();
                     ft.replace(R.id.fragment, fragmentPaiementAccepte);

@@ -14,16 +14,20 @@ public class Concert {
     private String salle;
     private String ville;
     private Date date;
+    private Integer prix;
     private Integer nbPlaceTotale;
     private Integer nbPlaceVendu;
+    private String description;
 
-    public Concert(String artiste, int cheminJaquette,String salle, String ville, String dateString, Integer nbPlaceTotale, Integer nbPlaceVendu){
+    public Concert(String artiste, int cheminJaquette,String salle, String ville, String dateString, Integer prix, Integer nbPlaceTotale, Integer nbPlaceVendu,String description){
         this.artiste=artiste;
         this.cheminJaquette = cheminJaquette;
         this.salle=salle;
         this.ville = ville;
+        this.prix = prix;
         this.nbPlaceTotale = nbPlaceTotale;
         this.nbPlaceVendu = nbPlaceVendu;
+        this.description=description;
         SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
         try {
             this.date = sdf.parse(dateString);
@@ -70,6 +74,14 @@ public class Concert {
 
     public void setDate(Date date) {this.date = date; }
 
+    public Integer getPrix() {
+        return prix;
+    }
+
+    public void setPrix(Integer prix) {
+        this.prix = prix;
+    }
+
     public Integer getNbPlaceTotale() {
         return nbPlaceTotale;
     }
@@ -91,4 +103,12 @@ public class Concert {
         };
         return "";
     };
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

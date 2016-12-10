@@ -10,6 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
 
 
 /**
@@ -29,6 +33,7 @@ public class FragmentPaiementAccepte extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private static Concert concert;
 
     private OnFragmentInteractionListener mListener;
 
@@ -36,21 +41,9 @@ public class FragmentPaiementAccepte extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentPaiementAccepte.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentPaiementAccepte newInstance(String param1, String param2) {
+    public static FragmentPaiementAccepte newInstance(Concert concertP) {
         FragmentPaiementAccepte fragment = new FragmentPaiementAccepte();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+        concert=concertP;
         return fragment;
     }
 
@@ -73,12 +66,30 @@ public class FragmentPaiementAccepte extends Fragment {
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState){
 
         super.onViewCreated(view, savedInstanceState);
+        //Initialisation du billet
+        //Initialisation des éléments du layout
+        ImageView jaquette = (ImageView) view.findViewById(R.id.jaquette);
+        TextView artiste = (TextView) view.findViewById(R.id.artiste);
+        TextView salle = (TextView) view.findViewById(R.id.salle);
+        TextView ville = (TextView) view.findViewById(R.id.ville);
+        TextView date = (TextView) view.findViewById(R.id.date);
         Button buttonVoirBillet = (Button) view.findViewById(R.id.buttonVoirBillet);
+
+        //Saisie des nouvelles informations
+        jaquette.setImageResource(concert.getCheminJaquette());
+        artiste.setText(concert.getArtiste());
+        salle.setText(concert.getSalle());
+        ville.setText(concert.getVille());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy à hh:mm");
+        String dateString = sdf.format(concert.getDate());
+        date.setText(dateString);
+
+        //Action du bouton Voir Billet
         buttonVoirBillet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Fragment fragmentMaReservation = null;
-                fragmentMaReservation = new FragmentMaReservation();
+                fragmentMaReservation = FragmentMaReservation.newInstance(concert);
                 if (fragmentMaReservation != null) {
                     FragmentTransaction ft = getFragmentManager().beginTransaction();
                     ft.replace(R.id.fragment, fragmentMaReservation);

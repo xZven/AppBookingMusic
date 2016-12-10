@@ -5,17 +5,23 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +43,8 @@ public class FragmentBillet extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private static Concert concert;
+    private Integer nbPlace;
 
     private OnFragmentInteractionListener mListener;
 
@@ -44,21 +52,9 @@ public class FragmentBillet extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentBillet.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentBillet newInstance(String param1, String param2) {
+    public static FragmentBillet newInstance(Concert concertP) {
         FragmentBillet fragment = new FragmentBillet();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+        concert=concertP;
         return fragment;
     }
 
@@ -75,6 +71,31 @@ public class FragmentBillet extends Fragment {
 
         super.onViewCreated(view, savedInstanceState);
 
+        //Initialisation du billet
+        //Initialisation des éléments du layout
+        ImageView jaquette = (ImageView) view.findViewById(R.id.jaquette);
+        TextView artiste = (TextView) view.findViewById(R.id.artiste);
+        TextView salle = (TextView) view.findViewById(R.id.salle);
+        TextView ville = (TextView) view.findViewById(R.id.ville);
+        TextView date = (TextView) view.findViewById(R.id.date);
+        TextView prix = (TextView) view.findViewById(R.id.textViewPrix);
+        TextView description = (TextView) view.findViewById(R.id.textViewDescription);
+        Button buttonReserver = (Button) view.findViewById(R.id.buttonReserver);
+
+        //Saisie des nouvelles informations
+        jaquette.setImageResource(concert.getCheminJaquette());
+        artiste.setText(concert.getArtiste());
+        salle.setText(concert.getSalle());
+        ville.setText(concert.getVille());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy à hh:mm");
+        String dateString = sdf.format(concert.getDate());
+        date.setText(dateString);
+        prix.setText(concert.getPrix().toString()+" €");
+        description.setText(concert.getDescription());
+        description.setMovementMethod(new ScrollingMovementMethod());
+
+
+        //Creation du choix du nombre de place
         Spinner spinnerNbPlace = (Spinner) view.findViewById(R.id.spinnerNbPlace);
         ArrayAdapter<Integer> dataSpinnerAdapter = new ArrayAdapter<Integer>(super.getContext(), android.R.layout.simple_spinner_item, genererListeNbPlaces());
         dataSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -84,38 +105,45 @@ public class FragmentBillet extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
                 // On selecting a spinner item
                 String item = parent.getItemAtPosition(position).toString();
+                nbPlace = Integer.parseInt(item);
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
+                nbPlace = 1;
             }
         });
 
-        Button buttonReserver = (Button) view.findViewById(R.id.buttonReserver);
+        //Action du bouton réserver
         buttonReserver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ConnectionManagerFragmentENC fm = (ConnectionManagerFragmentENC) getFragmentManager().findFragmentById(R.id.fragmentCM);
-                if(fm==null|| !fm.isInLayout())
-                {
-                    Toast.makeText(getContext(), "Veuillez vous connecter avant de réserver un billet s'il vous plaît. ", Toast.LENGTH_LONG).show();
-                    Fragment fragmentConnexion = null;
-                    fragmentConnexion = new FragmentConnexion();
-                    if (fragmentConnexion != null) {
-                        FragmentTransaction ft = getFragmentManager().beginTransaction();
-                        ft.replace(R.id.fragment, fragmentConnexion);
-                        ft.commit();
+                FragmentActivity myContext = getActivity();
+                FragmentManager fm = myContext.getSupportFragmentManager();
+                try{
+                    ConnectionManagerFragmentENC etat = (ConnectionManagerFragmentENC) fm.findFragmentById(R.id.fragmentCM);
+                    if(etat==null|| !etat.isInLayout())
+                    {
+                        Toast.makeText(getContext(), "Veuillez vous connecter avant de réserver un billet s'il vous plaît. ", Toast.LENGTH_LONG).show();
+                        Fragment fragmentConnexion = null;
+                        fragmentConnexion = new FragmentConnexion();
+                        if (fragmentConnexion != null) {
+                            FragmentTransaction ft = getFragmentManager().beginTransaction();
+                            ft.replace(R.id.fragment, fragmentConnexion);
+                            ft.commit();
+                        }
                     }
-                }
-                else
-                {
-                    Fragment fragmentPaiement = null;
-                    fragmentPaiement = new FragmentPaiement();
-                    if (fragmentPaiement != null) {
-                        FragmentTransaction ft = getFragmentManager().beginTransaction();
-                        ft.replace(R.id.fragment, fragmentPaiement);
-                        ft.commit();
+                }catch(Exception e){
+                    ConnectionManagerFragmentEC etat = (ConnectionManagerFragmentEC) fm.findFragmentById(R.id.fragmentCM);
+                    if(etat==null|| !etat.isInLayout()) {
+                        Fragment fragmentPaiement = null;
+                        fragmentPaiement = FragmentPaiement.newInstance(concert,nbPlace);
+                        if (fragmentPaiement != null) {
+                            FragmentTransaction ft = getFragmentManager().beginTransaction();
+                            ft.replace(R.id.fragment, fragmentPaiement);
+                            ft.commit();
+                        }
                     }
-                }
+                };
             }
         });
     }
