@@ -33,7 +33,7 @@
                 android:text="Petit Biscuit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textViewRecherche" />
+                android:id="@+id/textViewRechercheMotsCles" />
 
         </TableRow>
 
@@ -45,7 +45,7 @@
                 android:text="Genre Electronique du 23/11/2016 au 02/02/2017"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textViewRecherche" />
+                android:id="@+id/textViewRechercheGenreDate" />
         </TableRow>
 
         <TableRow
@@ -65,13 +65,19 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
 
-            <View
-                android:id="@+id/SplitLine"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height= "2dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                android:background="#b7c0c7" />
+                android:layout_height="match_parent">
+
+                <View
+                    android:id="@+id/SplitLine"
+                    android:layout_width="380dp"
+                    android:layout_height= "2dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="#b7c0c7" />
+            </LinearLayout>
 
         </TableRow>
 

@@ -17,9 +17,10 @@ public class Concert {
     private Integer prix;
     private Integer nbPlaceTotale;
     private Integer nbPlaceVendu;
+    private String genre;
     private String description;
 
-    public Concert(String artiste, int cheminJaquette,String salle, String ville, String dateString, Integer prix, Integer nbPlaceTotale, Integer nbPlaceVendu,String description){
+    public Concert(String artiste, int cheminJaquette,String salle, String ville, String dateString, Integer prix, Integer nbPlaceTotale, Integer nbPlaceVendu,String genre,String description){
         this.artiste=artiste;
         this.cheminJaquette = cheminJaquette;
         this.salle=salle;
@@ -111,4 +112,12 @@ public class Concert {
     public void setDescription(String description) {
         this.description = description;
     }
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
 }
+

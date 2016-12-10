@@ -18,17 +18,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link FragmentRechercheAvancee.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link FragmentRechercheAvancee#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FragmentRechercheAvancee extends Fragment
         implements View.OnClickListener{
     // TODO: Rename parameter arguments, choose names that match
@@ -39,6 +31,7 @@ public class FragmentRechercheAvancee extends Fragment
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private static String motsCles;
 
     private OnFragmentInteractionListener mListener;
 
@@ -51,12 +44,9 @@ public class FragmentRechercheAvancee extends Fragment
         // Required empty public constructor
     }
 
-
-    public static FragmentRechercheAvancee newInstance(String motsCles) {
+    public static FragmentRechercheAvancee newInstance(String motsClesP) {
         FragmentRechercheAvancee fragment = new FragmentRechercheAvancee();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, motsCles);
-        fragment.setArguments(args);
+        motsCles=motsClesP;
         return fragment;
     }
 
@@ -64,15 +54,23 @@ public class FragmentRechercheAvancee extends Fragment
         Bundle bundle=getArguments();
         super.onViewCreated(view, savedInstanceState);
 
+        //Initialisations des éléments du layout
+        final Spinner spinnerGenre = (Spinner) view.findViewById(R.id.spinnerGenre);
+        final Spinner spinnerRegion = (Spinner) view.findViewById(R.id.spinnerRegion);
+        Button buttonRechercheAvance = (Button) view.findViewById(R.id.buttonRechercheAvance);
+        EditText editFieldSearchAdvanced = (EditText) view.findViewById(R.id.editFieldSearchAdvanced);
+
+        //On recupere les mots cles du fragment précedent
+        editFieldSearchAdvanced.setText(motsCles);
+
         //Choix genre musical
-        Spinner spinnerGenre = (Spinner) view.findViewById(R.id.spinnerGenre);
         ArrayAdapter<String> dataSpinnerGenreAdapter = new ArrayAdapter<String>(super.getContext(), android.R.layout.simple_spinner_item, genererListeGenre());
         dataSpinnerGenreAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGenre.setAdapter(dataSpinnerGenreAdapter);
         spinnerGenre.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
-                String item = parent.getItemAtPosition(position).toString();
+                String genre = parent.getItemAtPosition(position).toString();
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -80,25 +78,25 @@ public class FragmentRechercheAvancee extends Fragment
         });
 
         //Choix région
-        Spinner spinnerRegion = (Spinner) view.findViewById(R.id.spinnerRegion);
         ArrayAdapter<String> dataSpinnerRegionAdapter = new ArrayAdapter<String>(super.getContext(), android.R.layout.simple_spinner_item, genererListeRegions());
         dataSpinnerRegionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerRegion.setAdapter(dataSpinnerRegionAdapter);
         spinnerRegion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
-                String item = parent.getItemAtPosition(position).toString();
+                String region = parent.getItemAtPosition(position).toString();
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
-        Button buttonRechercheAvance = (Button) view.findViewById(R.id.buttonRechercheAvance);
+
+        //Action du bouton recherche avance
         buttonRechercheAvance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Fragment fragmentMaRecherche = null;
-                fragmentMaRecherche = new FragmentMaRecherche();
+                fragmentMaRecherche = FragmentMaRecherche.newInstance(motsCles,spinnerGenre.getSelectedItem().toString(),editTextDateDu.getText().toString(),editTextDateAu.getText().toString(),spinnerRegion.getSelectedItem().toString());
                 if (fragmentMaRecherche != null)
                 {
                     FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -165,11 +163,12 @@ public class FragmentRechercheAvancee extends Fragment
         // Spinner Drop down elements
         List<String> genre = new ArrayList<String>();
         genre.add("Techno");
+        genre.add("House");
+        genre.add("Electro");
         genre.add("Hip Hop");
         genre.add("Rap");
         genre.add("Reggae");
         genre.add("Jazz");
-        genre.add("House");
         genre.add("Dance");
         genre.add("Dub");
         genre.add("Metal");
@@ -203,16 +202,6 @@ public class FragmentRechercheAvancee extends Fragment
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

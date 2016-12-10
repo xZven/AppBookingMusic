@@ -11,23 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link FragmentTopConcert.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link FragmentTopConcert#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FragmentTopConcert extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -57,21 +48,19 @@ public class FragmentTopConcert extends Fragment {
     }
 
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState){
-
         super.onViewCreated(view, savedInstanceState);
 
-        // Spinner element
+        //Initialisation des éléments du layout
         Spinner spinner = (Spinner) view.findViewById(R.id.spinnerRegion);
+        ImageView buttonSearchAdvanced = (ImageView) view.findViewById(R.id.buttonSearchAdvanced);
+        final EditText editFieldSearch = (EditText) view.findViewById(R.id.editFieldSearch);
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataSpinnerAdapter = new ArrayAdapter<String>(super.getContext(), android.R.layout.simple_spinner_item, genererListeRegions());
-
         // Drop down layout style - list view with radio button
         dataSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         // attaching data adapter to spinner
         spinner.setAdapter(dataSpinnerAdapter);
-
         // Spinner click listener
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -89,13 +78,12 @@ public class FragmentTopConcert extends Fragment {
             }
         });
 
-        afficherListeConcert();
-        ImageView buttonSearchAdvanced = (ImageView) view.findViewById(R.id.buttonSearchAdvanced);
+        //Action du bouton de recherche avancee
         buttonSearchAdvanced.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Fragment fragmentRechercheAvancee = null;
-                fragmentRechercheAvancee = new FragmentRechercheAvancee();
+                fragmentRechercheAvancee = FragmentRechercheAvancee.newInstance(editFieldSearch.getText().toString());
                 if (fragmentRechercheAvancee != null)
                 {
                     FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -104,6 +92,9 @@ public class FragmentTopConcert extends Fragment {
                 }
             }
         });
+
+        //Genration de la listView des concerts
+        afficherListeConcert();
     }
 
     @Override
@@ -143,17 +134,16 @@ public class FragmentTopConcert extends Fragment {
 
     private List<Concert> genererTopConcert(){
         List<Concert> concert = new ArrayList<Concert>();
-        concert.add(new Concert("MICHAEL CALFAN",R.drawable.michaelcalfan,"Le Bikini", "RAMONVILLE","01-12-2016 20:00:00",20,300,0,"Michael Calfan, né en 1989 à Paris, est un disc jockey et producteur de musique français."));
-        concert.add(new Concert("HARDWELL",R.drawable.hardwell,"Zénith de Toulouse", "TOULOUSE","12-01-2017 21:00:00",21,300,300,"Hardwell, de son vrai nom Robbert van de Corput, né le 7 janvier 1988 à Bréda, est un disc jockey et producteur de musique house et électronique néerlandais. Il s'illustre dans les genres electro house, EDM et big room. En 2008, il se fait connaître grâce à son bootleg Show Me Love vs. Be de Robin S., devenu un hit dans les clubs à travers le monde, puis repris par Michael Mind."));
-        concert.add(new Concert("AFROJACK",R.drawable.afrojack,"Le Rex", "TOULOUSE","16-12-2017 22:00:00",22,300,0,"Afrojack, de son vrai nom Nick Leonardus van de Wall, né le 9 septembre 1987 à Spijkenisse, est un producteur et disc jockey néerlandais de musique house. Après une 19e place en 2010, et une 7e place en 2011, il est classé 9e au classement des meilleurs disc-jockeys mondiaux du DJ Magazine en 2012 et 2013 ; il recule de trois places en 2014. Il est classé 8e en 2015."));
-        concert.add(new Concert("LOST FREQUENCIES",R.drawable.lostfrequencies,"Le Métronum", "TOULOUSE","20-12-2016 23:00:00",23,300,0,"Lost Frequencies, né Felix De Laet le 30 novembre 1993 à Bruxelles (Belgique), est un DJ, musicien et producteur belge."));
-        concert.add(new Concert("BROKEN BACK",R.drawable.brokenback,"Le Bikini", "Ramonville","15-12-2016 20:00:00",24,300,0,"Si sur le moment, ce jeune malouin ne devait pas se réjouir, il peut maintenant remercier cette vertèbre qui l'a cloué chez lui et l'a incité à s'investir pleinement dans ce qui n'était jusqu'à présent qu'une passion, la musique. C'est d'ailleurs comme clin d'oeil à cette mésaventure qu'il a nommé son projet Broken Back."));
+        concert.add(new Concert("MICHAEL CALFAN",R.drawable.michaelcalfan,"Le Bikini", "RAMONVILLE","21-12-2016 20:00:00",20,300,0,"House","Michael Calfan, né en 1989 à Paris, est un disc jockey et producteur de musique français."));
+        concert.add(new Concert("HARDWELL",R.drawable.hardwell,"Zénith de Toulouse", "TOULOUSE","22-01-2017 21:00:00",21,300,300,"Techno","Hardwell, de son vrai nom Robbert van de Corput, né le 7 janvier 1988 à Bréda, est un disc jockey et producteur de musique house et électronique néerlandais. Il s'illustre dans les genres electro house, EDM et big room. En 2008, il se fait connaître grâce à son bootleg Show Me Love vs. Be de Robin S., devenu un hit dans les clubs à travers le monde, puis repris par Michael Mind."));
+        concert.add(new Concert("AFROJACK",R.drawable.afrojack,"Le Rex", "TOULOUSE","23-12-2017 22:00:00",22,300,0,"House","Afrojack, de son vrai nom Nick Leonardus van de Wall, né le 9 septembre 1987 à Spijkenisse, est un producteur et disc jockey néerlandais de musique house. Après une 19e place en 2010, et une 7e place en 2011, il est classé 9e au classement des meilleurs disc-jockeys mondiaux du DJ Magazine en 2012 et 2013 ; il recule de trois places en 2014. Il est classé 8e en 2015."));
+        concert.add(new Concert("LOST FREQUENCIES",R.drawable.lostfrequencies,"Le Métronum", "TOULOUSE","24-12-2016 23:00:00",23,300,0,"House","Lost Frequencies, né Felix De Laet le 30 novembre 1993 à Bruxelles (Belgique), est un DJ, musicien et producteur belge."));
+        concert.add(new Concert("BROKEN BACK",R.drawable.brokenback,"Le Bikini", "Ramonville","25-12-2016 20:00:00",24,300,0,"Electro","Si sur le moment, ce jeune malouin ne devait pas se réjouir, il peut maintenant remercier cette vertèbre qui l'a cloué chez lui et l'a incité à s'investir pleinement dans ce qui n'était jusqu'à présent qu'une passion, la musique. C'est d'ailleurs comme clin d'oeil à cette mésaventure qu'il a nommé son projet Broken Back."));
         return concert;
     }
 
     private void afficherListeConcert(){
         List<Concert> concert = genererTopConcert();
-
         ConcertAdapter adapter = new ConcertAdapter(getView().getContext(), concert);
         ListViewConcerts.setAdapter(adapter);
         ListViewConcerts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -181,12 +171,6 @@ public class FragmentTopConcert extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        /*if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }*/
     }
 
     @Override
@@ -195,16 +179,6 @@ public class FragmentTopConcert extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

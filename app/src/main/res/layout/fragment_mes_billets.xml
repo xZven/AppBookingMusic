@@ -1,0 +1,51 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    tools:context="net.stri.m2.appbookingmusic.FragmentMesBillets">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="380dp"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:text="Mes réservations"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewMesReservations"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:layout_width="wrap_content"
+                    android:textStyle="normal|bold" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/ListViewConcerts" />
+        </TableRow>
+    </TableLayout>
+
+</FrameLayout>

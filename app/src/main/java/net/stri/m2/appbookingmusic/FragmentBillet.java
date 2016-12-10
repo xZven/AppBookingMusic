@@ -25,15 +25,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link FragmentBillet.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link FragmentBillet#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FragmentBillet extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -68,7 +59,6 @@ public class FragmentBillet extends Fragment {
     }
 
     public void onViewCreated(final View view, @Nullable final Bundle savedInstanceState){
-
         super.onViewCreated(view, savedInstanceState);
 
         //Initialisation du billet
@@ -94,7 +84,6 @@ public class FragmentBillet extends Fragment {
         description.setText(concert.getDescription());
         description.setMovementMethod(new ScrollingMovementMethod());
 
-
         //Creation du choix du nombre de place
         Spinner spinnerNbPlace = (Spinner) view.findViewById(R.id.spinnerNbPlace);
         ArrayAdapter<Integer> dataSpinnerAdapter = new ArrayAdapter<Integer>(super.getContext(), android.R.layout.simple_spinner_item, genererListeNbPlaces());
@@ -113,39 +102,53 @@ public class FragmentBillet extends Fragment {
             }
         });
 
-        //Action du bouton réserver
-        buttonReserver.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentActivity myContext = getActivity();
-                FragmentManager fm = myContext.getSupportFragmentManager();
-                try{
-                    ConnectionManagerFragmentENC etat = (ConnectionManagerFragmentENC) fm.findFragmentById(R.id.fragmentCM);
-                    if(etat==null|| !etat.isInLayout())
-                    {
-                        Toast.makeText(getContext(), "Veuillez vous connecter avant de réserver un billet s'il vous plaît. ", Toast.LENGTH_LONG).show();
-                        Fragment fragmentConnexion = null;
-                        fragmentConnexion = new FragmentConnexion();
-                        if (fragmentConnexion != null) {
-                            FragmentTransaction ft = getFragmentManager().beginTransaction();
-                            ft.replace(R.id.fragment, fragmentConnexion);
-                            ft.commit();
+        //Si le concert est complet on désactive le bouton résever
+        if(concert.getComplet().equals("Complet"))
+        {
+            buttonReserver.setEnabled(false);
+            spinnerNbPlace.setEnabled(false);
+            Toast.makeText(getContext(), "Concert complet.", Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            //Action du bouton réserver
+            buttonReserver.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FragmentActivity myContext = getActivity();
+                    FragmentManager fm = myContext.getSupportFragmentManager();
+                    try{
+                        ConnectionManagerFragmentENC etat = (ConnectionManagerFragmentENC) fm.findFragmentById(R.id.fragmentCM);
+                        //L'utilisateur n'est pas connecté
+                        if(etat==null|| !etat.isInLayout())
+                        {
+                            Toast.makeText(getContext(), "Veuillez vous connecter avant de réserver un billet s'il vous plaît. ", Toast.LENGTH_LONG).show();
+                            Fragment fragmentConnexion = null;
+                            //On lance le fragment de connexion
+                            fragmentConnexion = new FragmentConnexion();
+                            if (fragmentConnexion != null) {
+                                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                                ft.replace(R.id.fragment, fragmentConnexion);
+                                ft.commit();
+                            }
                         }
-                    }
-                }catch(Exception e){
-                    ConnectionManagerFragmentEC etat = (ConnectionManagerFragmentEC) fm.findFragmentById(R.id.fragmentCM);
-                    if(etat==null|| !etat.isInLayout()) {
-                        Fragment fragmentPaiement = null;
-                        fragmentPaiement = FragmentPaiement.newInstance(concert,nbPlace);
-                        if (fragmentPaiement != null) {
-                            FragmentTransaction ft = getFragmentManager().beginTransaction();
-                            ft.replace(R.id.fragment, fragmentPaiement);
-                            ft.commit();
+                    }catch(Exception e){
+                        ConnectionManagerFragmentEC etat = (ConnectionManagerFragmentEC) fm.findFragmentById(R.id.fragmentCM);
+                        //On vérifie que l'utilisateur est connecté
+                        if(etat==null|| !etat.isInLayout()) {
+                            Fragment fragmentPaiement = null;
+                            //On lance le fragment de paiement
+                            fragmentPaiement = FragmentPaiement.newInstance(concert,nbPlace);
+                            if (fragmentPaiement != null) {
+                                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                                ft.replace(R.id.fragment, fragmentPaiement);
+                                ft.commit();
+                            }
                         }
-                    }
-                };
-            }
-        });
+                    };
+                }
+            });
+        }
     }
 
     @Override
@@ -191,16 +194,6 @@ public class FragmentBillet extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
