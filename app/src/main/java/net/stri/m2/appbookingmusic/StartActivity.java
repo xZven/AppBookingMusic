@@ -3,7 +3,6 @@ package net.stri.m2.appbookingmusic;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -68,81 +67,6 @@ public class StartActivity extends AppCompatActivity
             ft.replace(R.id.fragmentCM,CMF_ENC);
             ft.commit();
         }
-
-        //Action du bouton Mes Billets
-        buttonMesBillets.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fm = getSupportFragmentManager();
-                try{
-                    ConnectionManagerFragmentENC etat = (ConnectionManagerFragmentENC) fm.findFragmentById(R.id.fragmentCM);
-                    //L'utilisateur n'est pas connecté
-                    if(etat==null|| !etat.isInLayout())
-                    {
-                        Toast.makeText(getApplicationContext(), "Veuillez vous connecter pour voir vos billets. ", Toast.LENGTH_LONG).show();
-                        Fragment fragmentConnexion = null;
-                        //On lance le fragment de connexion
-                        fragmentConnexion = new FragmentConnexion();
-                        if (fragmentConnexion != null) {
-                            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                            ft.replace(R.id.fragment, fragmentConnexion);
-                            ft.commit();
-                        }
-                    }
-                }catch(Exception e){
-                    ConnectionManagerFragmentEC etat = (ConnectionManagerFragmentEC) fm.findFragmentById(R.id.fragmentCM);
-                    //On vérifie que l'utilisateur est connecté
-                    if(etat==null|| !etat.isInLayout()) {
-                        Fragment fragmentMesBillets = null;
-                        //On lance le fragment MesBillets
-                        fragmentMesBillets = new FragmentMesBillets();
-                        if (fragmentMesBillets != null) {
-                            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                            ft.replace(R.id.fragment, fragmentMesBillets);
-                            ft.commit();
-                        }
-                    }
-                };
-            }
-        });
-
-        //Action du bouton mon profil
-        //Action du bouton Mes Billets
-        buttonMonProfil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fm = getSupportFragmentManager();
-                try{
-                    ConnectionManagerFragmentENC etat = (ConnectionManagerFragmentENC) fm.findFragmentById(R.id.fragmentCM);
-                    //L'utilisateur n'est pas connecté
-                    if(etat==null|| !etat.isInLayout())
-                    {
-                        Toast.makeText(getApplicationContext(), "Veuillez vous connecter pour voir votre profil. ", Toast.LENGTH_LONG).show();
-                        Fragment fragmentConnexion = null;
-                        //On lance le fragment de connexion
-                        fragmentConnexion = new FragmentConnexion();
-                        if (fragmentConnexion != null) {
-                            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                            ft.replace(R.id.fragment, fragmentConnexion);
-                            ft.commit();
-                        }
-                    }
-                }catch(Exception e){
-                    ConnectionManagerFragmentEC etat = (ConnectionManagerFragmentEC) fm.findFragmentById(R.id.fragmentCM);
-                    //On vérifie que l'utilisateur est connecté
-                    if(etat==null|| !etat.isInLayout()) {
-                        Fragment fragmentMonProfil = null;
-                        //On lance le fragment MesBillets
-                        fragmentMonProfil = new FragmentMonProfil();
-                        if (fragmentMonProfil != null) {
-                            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                            ft.replace(R.id.fragment, fragmentMonProfil);
-                            ft.commit();
-                        }
-                    }
-                };
-            }
-        });
      }
 
 
@@ -238,6 +162,36 @@ public class StartActivity extends AppCompatActivity
      */
     public void mesBillets(View v){
         // TODO code for button buttonMesBillets
+        FragmentManager fm = getSupportFragmentManager();
+        try{
+            ConnectionManagerFragmentENC etat = (ConnectionManagerFragmentENC) fm.findFragmentById(R.id.fragmentCM);
+            //L'utilisateur n'est pas connecté
+            if(etat==null|| !etat.isInLayout())
+            {
+                Toast.makeText(getApplicationContext(), "Veuillez vous connecter pour voir vos billets. ", Toast.LENGTH_LONG).show();
+                Fragment fragmentConnexion = null;
+                //On lance le fragment de connexion
+                fragmentConnexion = new FragmentConnexion();
+                if (fragmentConnexion != null) {
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.fragment, fragmentConnexion);
+                    ft.commit();
+                }
+            }
+        }catch(Exception e){
+            ConnectionManagerFragmentEC etat = (ConnectionManagerFragmentEC) fm.findFragmentById(R.id.fragmentCM);
+            //On vérifie que l'utilisateur est connecté
+            if(etat==null|| !etat.isInLayout()) {
+                Fragment fragmentMesBillets = null;
+                //On lance le fragment MesBillets
+                fragmentMesBillets = new FragmentMesBillets();
+                if (fragmentMesBillets != null) {
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.fragment, fragmentMesBillets);
+                    ft.commit();
+                }
+            }
+        }
     }
 
     /**
@@ -246,10 +200,39 @@ public class StartActivity extends AppCompatActivity
      * @param v
      */
     public void monProfil(View v){
-
+        FragmentManager fm = getSupportFragmentManager();
+        try{
+            ConnectionManagerFragmentENC etat = (ConnectionManagerFragmentENC) fm.findFragmentById(R.id.fragmentCM);
+            //L'utilisateur n'est pas connecté
+            if(etat==null|| !etat.isInLayout())
+            {
+                Toast.makeText(getApplicationContext(), "Veuillez vous connecter pour voir votre profil. ", Toast.LENGTH_LONG).show();
+                Fragment fragmentConnexion = null;
+                //On lance le fragment de connexion
+                fragmentConnexion = new FragmentConnexion();
+                if (fragmentConnexion != null) {
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.fragment, fragmentConnexion);
+                    ft.commit();
+                }
+            }
+        }catch(Exception e){
+            ConnectionManagerFragmentEC etat = (ConnectionManagerFragmentEC) fm.findFragmentById(R.id.fragmentCM);
+            //On vérifie que l'utilisateur est connecté
+            if(etat==null|| !etat.isInLayout()) {
+                Fragment fragmentMonProfil = null;
+                //On lance le fragment MesBillets
+                fragmentMonProfil = new FragmentMonProfil();
+                if (fragmentMonProfil != null) {
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.fragment, fragmentMonProfil);
+                    ft.commit();
+                }
+            }
+        }
     }
 
-    //
+    // Dans s'Identifier
     public void connexion(View v){
 
         this.pBar.setVisibility(View.VISIBLE);
