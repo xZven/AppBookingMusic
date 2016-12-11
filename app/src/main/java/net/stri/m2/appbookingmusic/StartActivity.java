@@ -201,11 +201,10 @@ public class StartActivity extends AppCompatActivity
      */
     public void monProfil(View v){
         FragmentManager fm = getSupportFragmentManager();
-        try{
+        try {
             ConnectionManagerFragmentENC etat = (ConnectionManagerFragmentENC) fm.findFragmentById(R.id.fragmentCM);
             //L'utilisateur n'est pas connecté
-            if(etat==null|| !etat.isInLayout())
-            {
+            if (etat == null || !etat.isInLayout()) {
                 Toast.makeText(getApplicationContext(), "Veuillez vous connecter pour voir votre profil. ", Toast.LENGTH_LONG).show();
                 Fragment fragmentConnexion = null;
                 //On lance le fragment de connexion
@@ -216,10 +215,10 @@ public class StartActivity extends AppCompatActivity
                     ft.commit();
                 }
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             ConnectionManagerFragmentEC etat = (ConnectionManagerFragmentEC) fm.findFragmentById(R.id.fragmentCM);
             //On vérifie que l'utilisateur est connecté
-            if(etat==null|| !etat.isInLayout()) {
+            if (etat == null || !etat.isInLayout()) {
                 Fragment fragmentMonProfil = null;
                 //On lance le fragment MesBillets
                 fragmentMonProfil = new FragmentMonProfil();
